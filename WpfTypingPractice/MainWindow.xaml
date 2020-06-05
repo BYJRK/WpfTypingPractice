@@ -41,8 +41,49 @@
                 <Setter Property="BorderThickness" Value="0,0,0,1"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
             </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource ForegroundLightBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FontSize" Value="26"/>
+                <Setter Property="Padding" Value="25,0"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    SnapsToDevicePixels="True"
+                                    >
+                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                    <Setter Property="Foreground" Value="#FF838383"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </Grid.Resources>
 
+        <!--上方标题-->
         <Grid>
             <TextBox Text="{Binding TypingSpeed,FallbackValue=0 字/分钟,StringFormat={}{0} 字/分钟}"
                      IsHitTestVisible="False"
@@ -60,29 +101,45 @@
                      />
         </Grid>
 
-        <ScrollViewer Margin="4"
-                      Grid.Row="1"
-                      HorizontalScrollBarVisibility="Disabled"
+        <!--文章显示区域-->
+        <Border Padding="15,8"
+                Grid.Row="1"
+                BorderThickness="0,1"
+                >
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="{StaticResource ForegroundTransparent}" Offset="-0.5"/>
+                    <GradientStop Color="{StaticResource ForegroundColor}" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource ForegroundTransparent}" Offset="1.5"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Hidden">
-            <ScrollViewer.InputBindings>
-                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MainGridMouseClickCommand}"/>
-            </ScrollViewer.InputBindings>
-            <Grid>
-                <Grid.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="FontSize" Value="20"/>
-                        <Setter Property="TextWrapping" Value="Wrap"/>
-                        <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
-                    </Style>
-                </Grid.Resources>
-                <TextBlock Text="{Binding Article,FallbackValue=打字练习}"
+                <ScrollViewer.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MainGridMouseClickCommand}"/>
+                </ScrollViewer.InputBindings>
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+                        </Style>
+                    </Grid.Resources>
+                    <TextBlock Text="{Binding Article,FallbackValue=打字练习}"
                            Foreground="{StaticResource ForegroundBrush}"/>
-                <TextBlock Text="{Binding Finished,FallbackValue=打字}"
+                    <TextBlock Text="{Binding Finished,FallbackValue=打字}"
                            Foreground="{StaticResource HighlightBrush}"/>
-            </Grid>
-        </ScrollViewer>
+                </Grid>
+            </ScrollViewer>
+        </Border>
 
+        <!--下方输入-->
         <Grid Grid.Row="2">
+            <Button Content="{Binding InputMode}"
+                    HorizontalAlignment="Left"
+                    Command="{Binding InputModeButtonCommand}"
+                    />
 
             <TextBox Text="{Binding Input,Mode=TwoWay,FallbackValue=lian,UpdateSourceTrigger=PropertyChanged}"
                      Foreground="{StaticResource HighlightBrush}"
@@ -91,13 +148,6 @@
                      IsEnabled="{Binding CanInput}"                     
                      HorizontalContentAlignment="Center"
                      >
-                <TextBox.BorderBrush>
-                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                        <GradientStop Color="#00006494" Offset="0"/>
-                        <GradientStop Color="#00006494" Offset="1"/>
-                        <GradientStop Color="#006494" Offset="0.5"/>
-                    </LinearGradientBrush>
-                </TextBox.BorderBrush>
             </TextBox>
         </Grid>
     </Grid>

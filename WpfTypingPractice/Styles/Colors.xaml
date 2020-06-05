@@ -12,6 +12,9 @@
 
     <Color x:Key="ForegroundColor">#006494</Color>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
+    
+    <Color x:Key="ForegroundTransparent">#00006494</Color>
+    <SolidColorBrush x:Key="ForegroundTransparentBrush" Color="{StaticResource ForegroundTransparent}"/>
 
     <Color x:Key="ForegroundLightColor">#0582CA</Color>
     <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLightColor}"/>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,10 @@ namespace WpfTypingPractice.ViewModels
             WindowEscCommand = new RelayCommand(() =>
             {
                 Input = "";
+            });
+            InputModeButtonCommand = new RelayCommand(() =>
+            {
+                IsUsingShuangpin = !IsUsingShuangpin;
             });
 
             Article = Finished = "双击上方任意位置打开外部文本";
@@ -109,7 +114,11 @@ namespace WpfTypingPractice.ViewModels
             }
         }
 
-        public bool IsUsingShuangpin { get; set; } = true;
+        /// <summary>
+        /// 是否使用双拼
+        /// </summary>
+        [AlsoNotifyFor("InputMode")]
+        public bool IsUsingShuangpin { get; set; } = false;
 
         #endregion
 
@@ -201,6 +210,20 @@ namespace WpfTypingPractice.ViewModels
         /// </summary>
         public string Finished { get; set; }
 
+        /// <summary>
+        /// 当前的输入方式
+        /// </summary>
+        public string InputMode
+        {
+            get
+            {
+                if (IsUsingShuangpin)
+                    return "双拼";
+                else
+                    return "全拼";
+            }
+        }
+
         #endregion
 
         #region 元件绑定的 Command
@@ -219,6 +242,11 @@ namespace WpfTypingPractice.ViewModels
         /// 按下 ESC，清空输入框
         /// </summary>
         public ICommand WindowEscCommand { get; set; }
+
+        /// <summary>
+        /// 切换输入方式的按钮
+        /// </summary>
+        public ICommand InputModeButtonCommand { get; set; }
 
         #endregion
 
