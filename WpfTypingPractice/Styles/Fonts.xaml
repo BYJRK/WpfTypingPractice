@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WpfTypingPractice.Styles">
 
-    <FontFamily x:Key="PingFang">pack://application:,,,/Fonts/#PingFang SC</FontFamily>
     <FontFamily x:Key="HanyiJiashu">pack://application:,,,/Fonts/#汉仪家书简</FontFamily>
     
 </ResourceDictionary>

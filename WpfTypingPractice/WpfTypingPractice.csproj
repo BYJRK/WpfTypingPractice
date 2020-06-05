@@ -125,7 +125,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Fonts\PingFang.ttf" />
     <Resource Include="Images\typing.ico" />
     <Content Include="pinyinKeys.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
