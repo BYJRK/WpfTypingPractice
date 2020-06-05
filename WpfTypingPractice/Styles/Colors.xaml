@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfTypingPractice.Styles">
+
+    <!--https://coolors.co/00a6fb-0582ca-006494-003554-051923-->
+
+    <Color x:Key="BackgroundColor">#051923</Color>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+
+    <Color x:Key="ForegroundDarkColor">#003554</Color>
+    <SolidColorBrush x:Key="ForegroundDarkBrush" Color="{StaticResource ForegroundDarkColor}"/>
+
+    <Color x:Key="ForegroundColor">#006494</Color>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
+
+    <Color x:Key="ForegroundLightColor">#0582CA</Color>
+    <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLightColor}"/>
+
+    <Color x:Key="HighlightColor">#00A6FB</Color>
+    <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource HighlightColor}"/>
+</ResourceDictionary>

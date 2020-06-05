@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTypingPractice", "WpfTypingPractice\WpfTypingPractice.csproj", "{C6684AF6-013A-40C5-818F-6D47AF746590}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6684AF6-013A-40C5-818F-6D47AF746590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6684AF6-013A-40C5-818F-6D47AF746590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6684AF6-013A-40C5-818F-6D47AF746590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6684AF6-013A-40C5-818F-6D47AF746590}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A74DABD9-069B-4763-8F12-D95A6B91B9ED}
+	EndGlobalSection
+EndGlobal

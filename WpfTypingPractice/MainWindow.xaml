@@ -1,0 +1,104 @@
+﻿<Window x:Class="WpfTypingPractice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTypingPractice"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="打字练习" MinHeight="600" MinWidth="800"
+        Height="800" Width="1200"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/Fonts.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+O" Command="{Binding WindowKeyCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding WindowEscCommand}"/>
+    </Window.InputBindings>
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource ForegroundLightBrush}"/>
+                <Setter Property="FontSize" Value="26"/>
+                <Setter Property="Margin" Value="4,0"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Style>
+        </Grid.Resources>
+
+        <Grid>
+            <TextBox Text="{Binding TypingSpeed,FallbackValue=0 字/分钟,StringFormat={}{0} 字/分钟}"
+                     IsHitTestVisible="False"
+                     HorizontalAlignment="Left"
+                     IsReadOnly="True"
+                     />
+            <TextBox Text="{Binding TypedWordCount,FallbackValue=已打 0 字,StringFormat=已打 {0} 字}"
+                     HorizontalAlignment="Right"
+                     IsHitTestVisible="False"
+                     IsReadOnly="True"
+                     />
+            <TextBox Text="{Binding ArticleTitle,FallbackValue=《标题》,StringFormat=《{0}》}"
+                     Visibility="{Binding IsTitleVisible}"
+                     HorizontalAlignment="Center"
+                     />
+        </Grid>
+
+        <ScrollViewer Margin="4"
+                      Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MainGridMouseClickCommand}"/>
+            </ScrollViewer.InputBindings>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                        <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Text="{Binding Article,FallbackValue=打字练习}"
+                           Foreground="{StaticResource ForegroundBrush}"/>
+                <TextBlock Text="{Binding Finished,FallbackValue=打字}"
+                           Foreground="{StaticResource HighlightBrush}"/>
+            </Grid>
+        </ScrollViewer>
+
+        <Grid Grid.Row="2">
+
+            <TextBox Text="{Binding Input,Mode=TwoWay,FallbackValue=lian,UpdateSourceTrigger=PropertyChanged}"
+                     Foreground="{StaticResource HighlightBrush}"
+                     Width="300"
+                     FontSize="36"
+                     IsEnabled="{Binding CanInput}"                     
+                     HorizontalContentAlignment="Center"
+                     >
+                <TextBox.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#00006494" Offset="0"/>
+                        <GradientStop Color="#00006494" Offset="1"/>
+                        <GradientStop Color="#006494" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </TextBox.BorderBrush>
+            </TextBox>
+        </Grid>
+    </Grid>
+</Window>
