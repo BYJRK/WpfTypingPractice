@@ -85,20 +85,23 @@
 
         <!--上方标题-->
         <Grid>
-            <TextBox Text="{Binding TypingSpeed,FallbackValue=0 字/分钟,StringFormat={}{0} 字/分钟}"
+            <Grid Margin="5">
+                <TextBox Text="{Binding TypingSpeed,FallbackValue=0 字/分钟,StringFormat={}{0} 字/分钟}"
                      IsHitTestVisible="False"
                      HorizontalAlignment="Left"
                      IsReadOnly="True"
                      />
-            <TextBox Text="{Binding TypedWordCount,FallbackValue=已打 0 字,StringFormat=已打 {0} 字}"
+                <TextBox Text="{Binding WordCountInfo,FallbackValue=20/100,Mode=OneWay}"
+                     Visibility="{Binding WordCountVisibility}"
                      HorizontalAlignment="Right"
                      IsHitTestVisible="False"
                      IsReadOnly="True"
                      />
-            <TextBox Text="{Binding ArticleTitle,FallbackValue=《标题》,StringFormat=《{0}》}"
-                     Visibility="{Binding IsTitleVisible}"
+                <TextBox Text="{Binding ArticleTitle,FallbackValue=《标题》,StringFormat=《{0}》}"
+                     Visibility="{Binding TitleVisibility}"
                      HorizontalAlignment="Center"
                      />
+            </Grid>
         </Grid>
 
         <!--文章显示区域-->
@@ -144,7 +147,7 @@
             <TextBox Text="{Binding Input,Mode=TwoWay,FallbackValue=lian,UpdateSourceTrigger=PropertyChanged}"
                      Foreground="{StaticResource HighlightBrush}"
                      Width="300"
-                     FontSize="36"
+                     FontSize="40"
                      IsEnabled="{Binding CanInput}"                     
                      HorizontalContentAlignment="Center"
                      >

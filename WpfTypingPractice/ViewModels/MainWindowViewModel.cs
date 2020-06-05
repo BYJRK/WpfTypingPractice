@@ -40,6 +40,7 @@ namespace WpfTypingPractice.ViewModels
             Finished = "";
             currentIndex = 0;
             TypedWordCount = 0;
+            WordCount = Article.Where(c => StringHelper.IsValidChineseChar(c)).Count();
             SkipInvalidChars();
         }
 
@@ -117,7 +118,7 @@ namespace WpfTypingPractice.ViewModels
         /// <summary>
         /// 是否使用双拼
         /// </summary>
-        [AlsoNotifyFor("InputMode")]
+        [AlsoNotifyFor(nameof(InputMode))]
         public bool IsUsingShuangpin { get; set; } = false;
 
         #endregion
@@ -141,10 +142,18 @@ namespace WpfTypingPractice.ViewModels
         /// 打字速度
         /// </summary>
         public int TypingSpeed { get; set; } = 0;
+
         /// <summary>
         /// 已经打过的字数统计
         /// </summary>
+        [AlsoNotifyFor(nameof(WordCountInfo))]
         public int TypedWordCount { get; set; } = 0;
+
+        /// <summary>
+        /// 总字数
+        /// </summary>
+        [AlsoNotifyFor(nameof(WordCountInfo))]
+        public int WordCount { get; set; } = 0;
 
         private void CalculateSpeed()
         {
@@ -189,7 +198,11 @@ namespace WpfTypingPractice.ViewModels
 
         public string ArticleTitle { get; set; }
 
-        public Visibility IsTitleVisible
+        /// <summary>
+        /// 文章标题是否可见
+        /// </summary>
+        [AlsoNotifyFor(nameof(WordCountVisibility))]
+        public Visibility TitleVisibility
         {
             get
             {
@@ -197,6 +210,25 @@ namespace WpfTypingPractice.ViewModels
                     return Visibility.Collapsed;
                 else
                     return Visibility.Visible;
+            }
+        }
+
+        /// <summary>
+        /// 字数统计信息是否可见
+        /// </summary>
+        public Visibility WordCountVisibility
+        {
+            get => TitleVisibility;
+        }
+
+        /// <summary>
+        /// 字数统计信息
+        /// </summary>
+        public string WordCountInfo
+        {
+            get
+            {
+                return $"{TypedWordCount}/{WordCount}";
             }
         }
 
