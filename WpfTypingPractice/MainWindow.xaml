@@ -116,25 +116,58 @@
                     <GradientStop Color="{StaticResource ForegroundTransparent}" Offset="1.5"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+            <Grid>
+                <!--提示输入区域的框-->
+                <Border HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="#5066CCFF"
+                            Padding="15"
+                            Visibility="{Binding NoticeMessageVisibility}"
+                            CornerRadius="20"
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Ellipse Width="60"
+                                     Height="60"
+                                     Fill="#2196f3"
+                                     />
+                            <TextBlock Text="i"
+                                           FontFamily="Arial Rounded MT Bold"
+                                           FontWeight="Bold"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="60"
+                                           />
+                        </Grid>
+                        <TextBlock Text="双击中央区域打开外部文本文件"
+                                       FontSize="40"
+                                       Foreground="White"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0"
+                                       />
+                    </StackPanel>
+                </Border>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Hidden">
-                <ScrollViewer.InputBindings>
-                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MainGridMouseClickCommand}"/>
-                </ScrollViewer.InputBindings>
-                <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="20"/>
-                            <Setter Property="TextWrapping" Value="Wrap"/>
-                            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
-                        </Style>
-                    </Grid.Resources>
-                    <TextBlock Text="{Binding Article,FallbackValue=打字练习}"
+                    <ScrollViewer.InputBindings>
+                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding MainGridMouseClickCommand}"/>
+                    </ScrollViewer.InputBindings>
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+                            </Style>
+                        </Grid.Resources>
+                        <TextBlock Text="{Binding Article,FallbackValue=打字练习}"
                            Foreground="{StaticResource ForegroundBrush}"/>
-                    <TextBlock Text="{Binding Finished,FallbackValue=打字}"
+                        <TextBlock Text="{Binding Finished,FallbackValue=打字}"
                            Foreground="{StaticResource HighlightBrush}"/>
-                </Grid>
-            </ScrollViewer>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
         </Border>
 
         <!--下方输入-->

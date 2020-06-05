@@ -25,7 +25,7 @@ namespace WpfTypingPractice.ViewModels
                 IsUsingShuangpin = !IsUsingShuangpin;
             });
 
-            Article = Finished = "双击上方任意位置打开外部文本";
+            //Article = Finished = "双击上方任意位置打开外部文本";
         }
 
         #region 与打字相关
@@ -214,6 +214,20 @@ namespace WpfTypingPractice.ViewModels
         }
 
         /// <summary>
+        /// 中央提示信息是否可见
+        /// </summary>
+        public Visibility NoticeMessageVisibility
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Article))
+                    return Visibility.Visible;
+                else
+                    return Visibility.Hidden;
+            }
+        }
+
+        /// <summary>
         /// 字数统计信息是否可见
         /// </summary>
         public Visibility WordCountVisibility
@@ -235,6 +249,7 @@ namespace WpfTypingPractice.ViewModels
         /// <summary>
         /// 用来练习打字的文本
         /// </summary>
+        [AlsoNotifyFor(nameof(NoticeMessageVisibility))]
         public string Article { get; set; }
 
         /// <summary>
@@ -302,7 +317,7 @@ namespace WpfTypingPractice.ViewModels
                 // 无法获取编码，放弃读取
                 if (encoding is null)
                 {
-                    MessageBox.Show("提示", "无法识别文本文件的文本编码。");
+                    MessageBox.Show("无法识别文本文件的文本编码。", "提示");
                     return;
                 }
 
@@ -310,15 +325,15 @@ namespace WpfTypingPractice.ViewModels
                 using (var reader = new StreamReader(filename, encoding))
                 {
                     var article = reader.ReadToEnd().Trim();
-                    Article = StringHelper.AutoInsertEmptyLine(article);
 
                     // 读取的文本文件内容是空的（不具有用来练习的文本内容）
-                    if (string.IsNullOrWhiteSpace(Article))
+                    if (string.IsNullOrWhiteSpace(article))
                     {
-                        MessageBox.Show("提示", "外部文本内容是空的。请选择其他文本文件。");
+                        MessageBox.Show("外部文本内容是空的。请选择其他文本文件。", "提示");
                         return;
                     }
 
+                    Article = StringHelper.AutoInsertEmptyLine(article);
                     ArticleTitle = Path.GetFileNameWithoutExtension(filename);
                     if (ArticleTitle.Length > 30)
                         ArticleTitle = ArticleTitle.Substring(0, 30) + "……";
