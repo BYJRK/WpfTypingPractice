@@ -6,7 +6,7 @@
 
 软件完全遵循 MVVM 架构模式。
 
-使用的 MuGet 包：
+使用的 NuGet 包：
 
 1. [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)
 2. [Newtonsoft.Json](https://www.newtonsoft.com/json)
